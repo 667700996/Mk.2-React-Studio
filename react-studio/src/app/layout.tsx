@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.scss"; // Changed from .css
-// The bootstrap css import is now removed
+import "./globals.scss";
 import AppNavbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider"; // Import ThemeProvider
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,13 +26,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-100">
+    <html lang="en" className="h-100" suppressHydrationWarning> {/* suppressHydrationWarning is recommended by next-themes */}
       <body className={`${geistSans.variable} ${geistMono.variable} d-flex flex-column h-100`}>
-        <AppNavbar />
-        <div style={{ flex: "1 0 auto" }}>
-          {children}
-        </div>
-        <Footer />
+        <ThemeProvider
+          attribute="data-bs-theme" // Use data-bs-theme for Bootstrap theming
+          defaultTheme="system"
+          enableSystem
+        >
+          <AppNavbar />
+          <div style={{ flex: "1 0 auto" }}>
+            {children}
+          </div>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

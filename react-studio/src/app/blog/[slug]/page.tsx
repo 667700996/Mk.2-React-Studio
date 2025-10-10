@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Container } from 'react-bootstrap';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPostIds, getPostData } from '@/lib/posts';
 import { formatDate } from '@/lib/format';
@@ -47,8 +46,8 @@ export default function Post({ params }: { params: { slug: string } }) {
     const postData = getPostData(params.slug);
 
     return (
-      <main>
-        <Container className="py-5" style={{ maxWidth: '840px' }}>
+      <main className="py-5">
+        <div className="article-container">
           <article>
             <header className="mb-5">
               <span className="badge-pill bg-opacity-10 bg-primary text-primary text-uppercase letter-spacing-1">
@@ -71,11 +70,11 @@ export default function Post({ params }: { params: { slug: string } }) {
                 </div>
               )}
             </header>
-            <div className="prose text-body" data-article>
+            <div className="prose" data-article>
               <MDXRemote source={postData.content} />
             </div>
           </article>
-        </Container>
+        </div>
       </main>
     );
   } catch (error) {

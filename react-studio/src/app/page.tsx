@@ -5,6 +5,7 @@ import CaseStudiesSection from '@/components/home/CaseStudiesSection';
 import PlaybookSection from '@/components/home/PlaybookSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
 import LogosRibbon from '@/components/home/LogosRibbon';
+import GlobalCta from '@/components/GlobalCta';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <CaseStudiesSection />
       <PlaybookSection />
       <TestimonialsSection />
+      <GlobalCta />
       <LatestPosts />
     </main>
   );

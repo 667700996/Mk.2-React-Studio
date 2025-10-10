@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Badge } from 'react-bootstrap';
 import { getSortedPostsData } from '@/lib/posts';
 import { formatDate } from '@/lib/format';
 import { siteConfig } from '@/lib/siteConfig';
@@ -42,26 +41,22 @@ export default function BlogPage({ searchParams }: BlogPageProps) {
 
         {allCategories.length > 0 && (
           <div className="d-flex flex-wrap gap-2 mb-4">
-            <Badge
-              as={Link}
+            <Link
               href="/blog"
-              bg={!activeCategory ? 'primary' : 'light'}
-              className={!activeCategory ? 'text-white' : 'text-muted'}
+              className={`badge text-decoration-none ${!activeCategory ? 'bg-primary text-white' : 'bg-light text-muted'}`}
             >
               All
-            </Badge>
+            </Link>
             {allCategories.map((category) => {
               const isActive = activeCategory === category;
               return (
-                <Badge
-                  as={Link}
+                <Link
                   href={`/blog?category=${encodeURIComponent(category)}`}
                   key={category}
-                  bg={isActive ? 'primary' : 'light'}
-                  className={isActive ? 'text-white' : 'text-muted'}
+                  className={`badge text-decoration-none ${isActive ? 'bg-primary text-white' : 'bg-light text-muted'}`}
                 >
                   {category}
-                </Badge>
+                </Link>
               );
             })}
           </div>

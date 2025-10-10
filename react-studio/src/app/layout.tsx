@@ -5,6 +5,7 @@ import AppNavbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { siteConfig } from '@/lib/siteConfig';
+import Analytics from '@/components/Analytics';
 
 const sans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -58,6 +59,7 @@ export default function RootLayout({
           <AppNavbar />
           <div style={{ flex: '1 0 auto' }}>{children}</div>
           <Footer />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

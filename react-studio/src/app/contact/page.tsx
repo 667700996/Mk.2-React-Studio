@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -20,7 +20,6 @@ export default function ContactPage() {
     e.preventDefault();
     setSubmissionStatus(null);
 
-    // NOTE: API route will be created in the next step
     const response = await fetch('/api/contact', {
       method: 'POST',
       headers: {
@@ -31,69 +30,71 @@ export default function ContactPage() {
 
     if (response.ok) {
       setSubmissionStatus('success');
-      setFormData({ name: '', email: '', message: '' }); // Clear form
+      setFormData({ name: '', email: '', message: '' });
     } else {
       setSubmissionStatus('error');
     }
   };
 
   return (
-    <main>
-      <Container className="py-5" style={{ maxWidth: '600px' }}>
-        <h1>Contact Us</h1>
-        <p>Have a question or want to work together? Send a message.</p>
-        
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+    <main className="py-5">
+      <div className="hypernova-container" style={{ maxWidth: '720px' }}>
+        <div className="text-center mb-5">
+          <span className="badge-pill bg-opacity-10 bg-primary text-primary">Start a project</span>
+          <h1 className="display-5 fw-bold text-white mt-3" style={{ fontFamily: 'var(--font-display)' }}>
+            Tell us about your next build
+          </h1>
+          <p className="text-muted mt-3">
+            Share a few details and the Hypernova squad will follow up within one business day.
+          </p>
+        </div>
+        <div className="glass-card p-4 p-lg-5">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} required />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="formEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} required />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formMessage">
-            <Form.Label>Message</Form.Label>
-            <Form.Control
-              as="textarea"
-              name="message"
-              rows={5}
-              value={formData.message}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="formMessage">
+              <Form.Label>Project goals</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="message"
+                rows={5}
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="What are you hoping to build or transform?"
+                required
+              />
+            </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+            <Button variant="primary" type="submit" size="lg" className="fw-semibold">
+              Send message
+            </Button>
+          </Form>
 
-        {submissionStatus === 'success' && (
-          <Alert variant="success" className="mt-4">
-            Your message has been sent successfully!
-          </Alert>
-        )}
-        {submissionStatus === 'error' && (
-          <Alert variant="danger" className="mt-4">
-            Something went wrong. Please try again later.
-          </Alert>
-        )}
-      </Container>
+          <div className="mt-4 text-muted small">
+            <p className="mb-1">Prefer a direct intro? Email us at <a href="mailto:hello@hypernova.studio">hello@hypernova.studio</a>.</p>
+            <p className="mb-0">We typically onboard new partners in two to four weeks.</p>
+          </div>
+
+          {submissionStatus === 'success' && (
+            <Alert variant="success" className="mt-4">
+              Your message has been sent successfully! We will be in touch shortly.
+            </Alert>
+          )}
+          {submissionStatus === 'error' && (
+            <Alert variant="danger" className="mt-4">
+              Something went wrong. Please try again later or email us directly.
+            </Alert>
+          )}
+        </div>
+      </div>
     </main>
   );
 }

@@ -37,7 +37,7 @@ const computeReadingTime = (content: string) => {
 const toExcerpt = (frontMatter: PostFrontMatter, content: string) => {
   if (frontMatter.excerpt) return frontMatter.excerpt;
   if (frontMatter.description) return frontMatter.description;
-  return content.replace(/[#>*`\-]/g, '').split('\n').filter(Boolean).join(' ').slice(0, 160).trim() + '…';
+  return content.replace(/[#>*`\-]/g, '').split('\n').filter(Boolean).join(' ').slice(0, 160).trim() + '...';
 };
 
 export function getSortedPostsData(): PostListItem[] {

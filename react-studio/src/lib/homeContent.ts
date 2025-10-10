@@ -41,7 +41,7 @@ export const caseStudies = [
   {
     client: 'Lumina BioTech',
     summary: 'Repositioned their narrative with an immersive research hub and boosted demo conversions by 62%.',
-    result: '↑ 62% qualified demos',
+    result: '+ 62% qualified demos',
   },
   {
     client: 'Orbit Commerce',

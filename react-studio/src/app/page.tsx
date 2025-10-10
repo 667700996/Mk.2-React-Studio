@@ -1,14 +1,11 @@
-'use client';
-
-import { Container } from 'react-bootstrap';
+import Hero from '@/components/Hero';
+import LatestPosts from '@/components/LatestPosts';
 
 export default function Home() {
   return (
     <main>
-      <Container className="py-5">
-        <h1>Welcome to our new website!</h1>
-        <p>This is the homepage.</p>
-      </Container>
+      <Hero />
+      <LatestPosts />
     </main>
   );
 }

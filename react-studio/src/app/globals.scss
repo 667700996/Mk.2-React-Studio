@@ -1,9 +1,23 @@
-// 1. Include custom variable overrides
-@import "../styles/theme.scss";
+// Define custom CSS variables for light and dark themes
+:root, [data-bs-theme="light"] {
+  --bs-primary: #2A75E4;
+  --bs-primary-rgb: 42, 117, 228;
 
-// 2. Include all of Bootstrap's Sass
-// The `~` is a shorthand for node_modules
+  // You can also customize body colors
+  --bs-body-color: #212529;
+  --bs-body-bg: #f9f9f9;
+}
+
+[data-bs-theme="dark"] {
+  --bs-primary: #579BFF; // A lighter blue for dark mode
+  --bs-primary-rgb: 87, 155, 255;
+
+  // Customize body colors for dark mode
+  --bs-body-color: #dee2e6;
+  --bs-body-bg: #121212; // A common dark background color
+}
+
+// Include all of Bootstrap's Sass
 @import "~bootstrap/scss/bootstrap";
 
-// 3. Add any other global styles below
-// We can leave this empty for now as Bootstrap handles the base styling.
+// You can add other global styles here if needed

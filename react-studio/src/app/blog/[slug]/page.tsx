@@ -1,17 +1,16 @@
 import { Container } from 'react-bootstrap';
 import { getAllPostIds, getPostData } from '@/lib/posts';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 
 export async function generateStaticParams() {
   const paths = getAllPostIds();
-  // The paths look like: [{ params: { slug: 'first-post' } }, ...]
-  // We need to return an array of slug objects: [{ slug: 'first-post' }, ...]
   return paths.map(path => ({
     slug: path.params.slug
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const postData = await getPostData(params.slug);
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  const postData = getPostData(params.slug);
   
   const description = postData.content.substring(0, 160) + '...';
 
@@ -28,8 +27,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function Post({ params }: { params: { slug: string } }) {
-  const postData = await getPostData(params.slug);
+export default function Post({ params }: { params: { slug: string } }) {
+  const postData = getPostData(params.slug);
 
   return (
     <main>
@@ -39,7 +38,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
           <div className="text-muted mb-4">
             {postData.date}
           </div>
-          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+          <MDXRemote source={postData.content} />
         </article>
       </Container>
     </main>

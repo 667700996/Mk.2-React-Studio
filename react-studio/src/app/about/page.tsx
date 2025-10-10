@@ -2,12 +2,12 @@
 
 import { Container } from 'react-bootstrap';
 
-export default function Home() {
+export default function AboutPage() {
   return (
     <main>
       <Container className="py-5">
-        <h1>Welcome to our new website!</h1>
-        <p>This is the homepage.</p>
+        <h1>About Us</h1>
+        <p>This is the about page.</p>
       </Container>
     </main>
   );

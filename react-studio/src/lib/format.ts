@@ -5,13 +5,9 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
 });
 
 export const formatDate = (isoDate: string) => {
-  try {
-    const date = new Date(isoDate);
-    if (Number.isNaN(date.getTime())) {
-      return isoDate;
-    }
-    return dateFormatter.format(date);
-  } catch (error) {
+  const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) {
     return isoDate;
   }
+  return dateFormatter.format(date);
 };

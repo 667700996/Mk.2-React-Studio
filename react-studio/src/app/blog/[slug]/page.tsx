@@ -33,7 +33,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
         description,
       },
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Article not found',
       description: `${siteConfig.name} article could not be located.`,
@@ -77,7 +77,7 @@ export default function Post({ params }: { params: { slug: string } }) {
         </div>
       </main>
     );
-  } catch (error) {
+  } catch {
     return notFound();
   }
 }

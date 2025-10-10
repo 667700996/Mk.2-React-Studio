@@ -1,45 +1,48 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.scss";
-import AppNavbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/ThemeProvider"; // Import ThemeProvider
+import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google';
+import './globals.scss';
+import AppNavbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { siteConfig } from '@/lib/siteConfig';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const sans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const display = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-display',
+  display: 'swap',
 });
-
-import type { Metadata } from "next";
-
-const siteUrl = 'https://your-domain.com'; // Replace with your actual domain
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'React Studio',
-    template: '%s | React Studio',
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.shortName}`,
   },
-  description: 'A website and blog about modern web development, built with Next.js and React.',
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
   openGraph: {
-    title: 'React Studio',
-    description: 'A website and blog about modern web development.',
-    url: siteUrl,
-    siteName: 'React Studio',
-    // You should create a default social media image and place it in the public folder
-    // images: ['/og-image.png'], 
+    title: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     type: 'website',
+    locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'React Studio',
-    description: 'A website and blog about modern web development.',
-    // images: ['/og-image.png'],
+    title: siteConfig.name,
+    description: siteConfig.description,
+  },
+  alternates: {
+    canonical: siteConfig.url,
   },
 };
 
@@ -49,17 +52,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-100" suppressHydrationWarning> {/* suppressHydrationWarning is recommended by next-themes */}
-      <body className={`${geistSans.variable} ${geistMono.variable} d-flex flex-column h-100`}>
-        <ThemeProvider
-          attribute="data-bs-theme" // Use data-bs-theme for Bootstrap theming
-          defaultTheme="system"
-          enableSystem
-        >
+    <html lang="en" className="h-100" suppressHydrationWarning>
+      <body className={`${sans.variable} ${display.variable} d-flex flex-column min-vh-100`}>
+        <ThemeProvider attribute="data-bs-theme" defaultTheme="system" enableSystem>
           <AppNavbar />
-          <div style={{ flex: "1 0 auto" }}>
-            {children}
-          </div>
+          <div style={{ flex: '1 0 auto' }}>{children}</div>
           <Footer />
         </ThemeProvider>
       </body>

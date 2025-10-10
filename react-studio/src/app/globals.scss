@@ -1,23 +1,59 @@
-// Define custom CSS variables for light and dark themes
-:root, [data-bs-theme="light"] {
-  --bs-primary: #2A75E4;
-  --bs-primary-rgb: 42, 117, 228;
+@import '../styles/design-tokens';
+@import '~bootstrap/scss/bootstrap';
 
-  // You can also customize body colors
-  --bs-body-color: #212529;
-  --bs-body-bg: #f9f9f9;
+* {
+  box-sizing: border-box;
 }
 
-[data-bs-theme="dark"] {
-  --bs-primary: #579BFF; // A lighter blue for dark mode
-  --bs-primary-rgb: 87, 155, 255;
-
-  // Customize body colors for dark mode
-  --bs-body-color: #dee2e6;
-  --bs-body-bg: #121212; // A common dark background color
+body {
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  background: radial-gradient(circle at top left, rgba(var(--accent-glow), 0.16), transparent 55%),
+    var(--surface-0);
+  color: var(--text-secondary);
+  min-height: 100vh;
 }
 
-// Include all of Bootstrap's Sass
-@import "~bootstrap/scss/bootstrap";
+a {
+  color: var(--accent-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 
-// You can add other global styles here if needed
+  &:hover {
+    color: var(--accent-tertiary);
+  }
+}
+
+main {
+  width: 100%;
+}
+
+.hypernova-container {
+  width: min(100% - 2rem, var(--container-max));
+  margin-inline: auto;
+}
+
+.glass-card {
+  background: var(--gradient-card);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-pill {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.letter-spacing-1 {
+  letter-spacing: 0.24em;
+}
+
+.hero-section {
+  padding-block: clamp(5rem, 12vw, 8rem);
+}

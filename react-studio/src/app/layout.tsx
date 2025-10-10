@@ -15,9 +15,32 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import type { Metadata } from "next";
+
+const siteUrl = 'https://your-domain.com'; // Replace with your actual domain
+
 export const metadata: Metadata = {
-  title: "React Studio",
-  description: "A website and blog built with Next.js and React.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'React Studio',
+    template: '%s | React Studio',
+  },
+  description: 'A website and blog about modern web development, built with Next.js and React.',
+  openGraph: {
+    title: 'React Studio',
+    description: 'A website and blog about modern web development.',
+    url: siteUrl,
+    siteName: 'React Studio',
+    // You should create a default social media image and place it in the public folder
+    // images: ['/og-image.png'], 
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'React Studio',
+    description: 'A website and blog about modern web development.',
+    // images: ['/og-image.png'],
+  },
 };
 
 export default function RootLayout({

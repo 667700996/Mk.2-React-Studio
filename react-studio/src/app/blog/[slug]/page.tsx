@@ -12,8 +12,19 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const postData = await getPostData(params.slug);
+  
+  const description = postData.content.substring(0, 160) + '...';
+
   return {
     title: postData.title,
+    description: description,
+    openGraph: {
+      title: postData.title,
+      description: description,
+      url: `/blog/${postData.id}`,
+      type: 'article',
+      publishedTime: postData.date,
+    },
   };
 }
 

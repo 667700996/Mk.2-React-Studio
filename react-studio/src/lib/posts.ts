@@ -65,6 +65,7 @@ export async function getPostData(id: string) {
   return {
     id,
     contentHtml,
+    content: matterResult.content, // Add raw content
     ...(matterResult.data as { date: string; title: string }),
   };
 }

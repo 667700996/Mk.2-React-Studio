@@ -5,7 +5,7 @@ import { getAllPostIds, getPostData } from '@/lib/posts';
 import { formatDate } from '@/lib/format';
 import { siteConfig } from '@/lib/siteConfig';
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const paths = getAllPostIds();
   return paths.map((path) => ({
     slug: path.params.slug,
@@ -41,7 +41,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   }
 }
 
-export default function Post({ params }: { params: { slug: string } }) {
+export default async function Post({ params }: { params: { slug: string } }) {
   try {
     const postData = getPostData(params.slug);
 

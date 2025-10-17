@@ -12,9 +12,10 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   try {
-    const postData = getPostData(params.slug);
+    const { slug } = await params;
+    const postData = getPostData(slug);
     const description = postData.excerpt;
 
     return {
@@ -41,9 +42,10 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   }
 }
 
-export default async function Post({ params }: { params: { slug: string } }) {
+export default async function Post({ params }: { params: Promise<{ slug:string }> }) {
   try {
-    const postData = getPostData(params.slug);
+    const { slug } = await params;
+    const postData = getPostData(slug);
 
     return (
       <main className="py-5">

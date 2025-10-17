@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google';
 import './globals.scss';
+import { Suspense } from 'react';
 import AppNavbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/ThemeProvider';
@@ -59,7 +60,9 @@ export default function RootLayout({
           <AppNavbar />
           <div style={{ flex: '1 0 auto' }}>{children}</div>
           <Footer />
-          <Analytics />
+          <Suspense fallback={null}>
+            <Analytics />
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>
